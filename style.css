@@ -1,29 +1,39 @@
+/* importing google fonts */
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-body {
-    background-color: #007bff;
+body{
+    background: #1cc3cf;
+}
+
+::selection{
+    color: #fff;
+    background: #007bff;
 }
 
 .start_btn,
 .info_box,
 .quiz_box,
-.result_box {
-    justify-content: center;
-    margin-right: 100px;
-    margin-left: 100px;
-    align-items: center;
+.result_box{
     position: absolute;
-    border: 1px solid black;
+    top: 50%;
+    left: 50%;
 }
 
-/* quiz section */
+.info_box.activeInfo,
+.quiz_box.activeQuiz,
+.result_box.activeResult{
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+}
 
-.start_btn button {
+.start_btn button{
     font-size: 25px;
     font-weight: 500;
     color: #007bff;
@@ -31,227 +41,244 @@ body {
     outline: none;
     border: none;
     border-radius: 5px;
+    background: #fff;
     cursor: pointer;
-    justify-content: center;
 }
 
-.start_btn button:hover {
-    background-color:#3f9bfd;
-}
-
-.info_box {
-    width: 200px;
+.info_box{
+    width: 540px;
     background: #fff;
     border-radius: 5px;
     opacity: 0;
     pointer-events: none;
 }
 
-.info_box .info_title {
-    height: 400px;
-    width: 80%;
+.info_box .info-title{
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 35px;
+    padding: 0 30px;
+    border-radius: 5px 5px 0 0;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.info_box .info_list {
-    padding: 15px 35px;
+.info_box .info-list{
+    padding: 15px 30px;
 }
 
-.info_box .info_list .info {
+.info_box .info-list .info{
     margin: 5px 0;
     font-size: 17px;
 }
 
-.info_box .buttons {
+.info_box .info-list .info span{
+    font-weight: 600;
+    color: #007bff;
+}
+.info_box .buttons{
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 0 25px;
-    border-top: 1px solid black;
+    padding: 0 30px;
+    border-top: 1px solid lightgrey;
 }
 
-span{
-    border-bottom: 1px solid black;
-}
-
-.info_box .buttons button {
+.info_box .buttons button{
     margin: 0 5px;
     height: 40px;
     width: 100px;
-    border: 1px solid transparent;
-    color: #fff;
-    border-radius: 5px;
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #007bff;
 }
 
-.buttons button.quit {
-    border-color: #007bff;
-    color: #007bff;
-}
-
-.buttons button.restart {
-    border-color: #007bff;
-    color: #007bff;
-}
-
-.buttons button.quit:hover{
-    color: black;
-    background-color: red;
-}
-
-.buttons button.restart:hover{
-    color: black;
-    background-color: cyan;
-}
-
-.quiz_box {
+.quiz_box{
     width: 550px;
     background: #fff;
     border-radius: 5px;
     opacity: 0;
     pointer-events: none;
-    display: flex;
 }
 
-.quiz_box header {
+.quiz_box header{
     position: relative;
-    z-index: 99;
+    z-index: 2;
     height: 70px;
     padding: 0 30px;
     background: #fff;
+    border-radius: 5px 5px 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: 5px 5px 0 0;
 }
 
-.quiz_box header .title {
+.quiz_box header .title{
     font-size: 20px;
-    font-weight: 600px;
+    font-weight: 600;
 }
 
-.quiz_box header .timer {
+.quiz_box header .timer{
+    color: #004085;
+    background: #cce5ff;
+    border: 1px solid #b8daff;
+    height: 45px;
+    padding: 0 8px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 145px;
-    height: 45px;
-    background: #cce5ff;
-    border: 1px solid black;
-    border-radius: 5px;
 }
 
-.quiz_box header .timer .time_text{
+.quiz_box header .timer .time_left_txt{
     font-weight: 400;
     font-size: 17px;
+    user-select: none;
 }
 
 .quiz_box header .timer .timer_sec{
     font-size: 18px;
     font-weight: 500;
-    background: #343a40;
     height: 30px;
     width: 45px;
     color: #fff;
-    text-align: center;
-    line-height: 30px;
     border-radius: 5px;
-    border: 1px solid green;
+    line-height: 30px;
+    text-align: center;
+    background: #343a40;
+    border: 1px solid #343a40;
+    user-select: none;
 }
 
-.quiz_box section{
+.quiz_box header .time_line{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 3px;
+    background: #007bff;
+}
+
+section{
     padding: 25px 30px 20px 30px;
     background: #fff;
 }
 
-.quiz_box section .que_text{
+section .que_text{
     font-size: 25px;
     font-weight: 600;
 }
 
-.quiz_box section .option_list{
-    padding: 20px 0;
-    display: block;
+/*option list section */
+section .option_list{
+    padding: 20px 0px;
+    display: block;   
 }
 
-section .option_list .option {
-    background: beige;
-    border: 1px solid grey;
+section .option_list .option{
+    background: rgb(67, 108, 145);
+    border: 1px solid #84c5fe;
     border-radius: 5px;
     padding: 8px 15px;
+    font-size: 17px;
     margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.quiz_box section .option_list .option:hover {
-    background-color: lightgreen;
-}
-
-.quiz_box footer{
-    height: 60px;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.quiz_box footer .total_que span{
-    display: flex;
+section .option_list .option:last-child{
+    margin-bottom: 0px;
 }
 
-footer .total_que span p{
-    font-weight: 500;
-    padding: 0 5px;
+section .option_list .option:hover{
+    color: #004085;
+    background: #83b1e2;
+    border: 1px solid #b8e5ff;
 }
 
-footer .next_btn{
-    height: 40px;
-    padding: 0 13px;
-    font-size: 18px;
-    margin-right: 10px;
-    background: cyan;
-    border-radius: 5px;
-    border: 1px solid blue;
+section .option_list .option.correct{
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
 }
 
-footer .next_btn:hover {
-    background: lightgreen;
+section .option_list .option.incorrect{
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
 }
 
+section .option_list .option.disabled{
+    pointer-events: none;
+}
+
+section .option_list .option .icon{
+    height: 26px;
+    width: 26px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 13px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    line-height: 24px;
+}
+.option_list .option .icon.tick{
+    color: #23903c;
+    border-color: #23903c;
+    background: #d4edda;
+}
+
+.option_list .option .icon.cross{
+    color: #a42834;
+    background: #f8d7da;
+    border-color: #a42834;
+}
+
+/*result box section */
 .result_box{
     background: #fff;
-    justify-content: center;
+    border-radius: 5px;
+    display: flex;
+    padding: 25px 30px;
     width: 450px;
-    padding: 25px;
     align-items: center;
-    justify-content:space-between;
+    flex-direction: column;
+    justify-content: center;
     opacity: 0;
     pointer-events: none;
 }
 
+.result_box .icon{
+    font-size: 100px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
 .result_box .complete_text{
     font-size: 20px;
+    font-weight: 500;
 }
 
 .result_box .score_text span{
     display: flex;
     margin: 10px 0;
     font-size: 18px;
+    font-weight: 500;
 }
 
-.score_text span p{
-    font-weight: 600;
+.result_box .score_text span p{
     padding: 0 4px;
+    font-weight: 600;
 }
 
 .result_box .buttons{
@@ -261,8 +288,87 @@ footer .next_btn:hover {
 
 .result_box .buttons button{
     margin: 0 10px;
-    height: 40px;
+    height: 45px;
     padding: 0 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
     border-radius: 5px;
+    border: 1px solid #007bff;
 }
+
+.buttons button.restart{
+    color: #fff;
+    background: #007bff;
+}
+
+.buttons button.restart:hover{
+    background: #0263ca;
+}
+
+.buttons button.quit{
+    color: #007bff;
+    background: #fff;
+}
+
+.buttons button.quit:hover{
+    color: #fff;
+    background: #007bff;
+}
+
+/* footer section */
+footer{
+    height: 60px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid lightgrey;
+}
+
+footer .total_que span{
+    display: flex;
+    user-select: none;
+}
+
+footer .total_que span p{
+    font-weight: 500;
+    padding: 0 5px;
+}
+
+footer .total_que span p:first-child{
+    padding-left: 0px;
+}
+
+footer button{
+    height: 40px;
+    padding: 0 13px;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    background: #007bff;
+    border: 1px solid #007bff;
+    line-height: 10px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+footer button:hover{
+    background: #0263ca;
+}
+
+footer button.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+
+
 
