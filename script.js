@@ -44,5 +44,69 @@ let counter;
 let counterLine;
 let widthValue = 0;
 
+//select the restart and quit elements from index.html 
 const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
+
+//function for restart button 
+restart_quiz.onclick = ()=>{
+    //show the quiz box 
+    quiz_box.classList.add("activeQuiz");
+    //next we need to hide the result box so it isnt overlapping
+    result_box.classList.remove("activeResult");
+    timeValue = 15;
+    que_count = 0;
+    que_numb = 1;
+    userScore = 0;
+    widthValue = 0;
+    //set a call to the showQuestions function 
+    showQuestions(que_count); //call the showQuestions function
+    queCounter(que_numb); //give the que value to the counter so it adds 
+    clearInterval(counter); // clear the counter 
+    clearInterval(counterLine);//clear counterLine
+    startTimer(timeValue);//call the function to start the timer 
+    startTimerLine(widthValue);//call the function for timer line 
+    timeText.textContent = "Time Remaining";// timetext changed to this 
+    next_btn.classList.remove("show");//hide the next button 
+}
+
+//if the quit button is clicked by user 
+quit_quiz.onclick = ()=> {
+    window.location.reload(); //reload the current window so it saves 
+}
+//select the html elements needed to move questions 
+const next_btn = document.querySelector("footer .next_btn");
+const bottom_ques_counter = document.querySelector("footer .total_que");
+
+//if the next question button is clicked 
+next_btn.onclick = ()=>{
+    //need an if statement to start the quiz base values 
+    if(que_count < questions.length - 1){
+        //increase the question count
+        que_count++; 
+        //increase the que_numb value
+        que_numb++; 
+        //show the questions to the user
+        showQuestions(que_count); 
+        //give que_numb value to queCounter to see which question we're on
+        queCounter(que_numb);
+        //clear the counter 
+        clearInterval(counter);
+        //clear the counterLine
+        clearInterval(counterLine);
+        //call the function to start the 15 second timer per question
+        startTimer(timeValue);
+        //call function to start the timerline value as well
+        startTimerLine(widthValue);
+        //add the time left 
+        timeText.textContent = "Time Remaining";
+        //hide the next question button 
+        next_btn.classList.remove("show");
+    } else { //basically says else show the score and dont show more time 
+        clearInterval(counter);
+        clearInterval(counterLine);
+        showResult();
+    }
+}
+
+
