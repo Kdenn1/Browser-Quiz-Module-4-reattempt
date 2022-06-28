@@ -109,4 +109,78 @@ next_btn.onclick = ()=>{
     }
 }
 
+//get the questions from the array in the other js document
+function showQuestions(index){
+    const que_text = document.querySelector("que_text");
+
+    //use js to append the div and pull questions from array 
+    let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '<span>';
+    //insert options from array into new divs to display in html 
+    let option_tag = '<div class="option"><span>' + questions[index].options[0] + '</span></div>'
+    + '<div class="option"><span>' + questions[index].options[1] + '</span></div>'
+    + '<div class="option"><span>' + questions[index].options[2] + '</span></div>'
+    + '<div class="option"><span>' + questions[index].options[3] + '</span></div>';
+    //append the html with a new span element 
+    que_text.innerHTML = que_tag;
+    //add a div inside the option span
+    option_list.innerHTML = option_tag;
+
+    const option = option_list.querySelectorAll("option");
+
+    //make the onclick apply to all the options 
+    for(i=0; i < option.length; i++){
+        option[i].setAttribute("onclick", "optionSelected(this)");
+    }
+}
+
+//if an option is clicked 
+function optionSelected(answer){
+    //clear the counter 
+    clearInterval(counter);
+    //clear counterline 
+    clearInterval(counterLine);
+    //get the option that was selected 
+    let userAns = answer.textContent;
+    //grab correct answer from array 
+    let correcAns = questions[que_count].answer;
+    //get all the available options 
+    const allOptions = option_list.children.length;
+
+    //if statement for the user getting the correct answer 
+    if(userAns == correcAns){
+        userScore += 1; //add 1 to the current score 
+        answer.classList.add("correct"); //make the correct option green 
+        console.log("Your answer is correct!");
+        console.log("Your current score is = " + userScore); //show current score
+    } else {
+        answer.classList.add("incorrect"); //make wrong answer appear red 
+        console.log("that answer was wrong! Loser!");
+
+        //for loop to register answer to array of questions 
+        for(i=0; i < allOptions; i++){
+            if(option_list.children[i].textContent == correcAns){
+                option_list.children[i].setAttribute("class", "Correct!");
+                console.log("Correct answer has been chosen for you");
+            }
+        }
+    }//once an option is selected you cant select a different one 
+    for(i=0; i<allOptions; i++){
+        option_list.children[i].classList.add("disabled");
+    }
+    next_btn.classList.add("show"); //display next button if an option has been chosen 
+}
+
+//function to show results at the end of the quiz 
+function showResult(){
+    info_box.classList.remove("activeInfo");//dont show info box or quiz box 
+    quiz_box.classList.remove("activeQuiz");
+    result_box.classList.add("activeResult"); //show result box 
+    const scoreText = result_box.querySelector(".score_text");
+
+    //if statement for score  
+    if(userScore > 0) {
+        let scoreTag = '<span> Good job! You got <p>' + userScore + '</p></span>';
+        scoreText.innerHTML = scoreTag;
+    }
+}
 
